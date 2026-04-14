@@ -1,0 +1,40 @@
+<!-- Plugin Configuration File: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN, cannot be changed between the plugin versions. -->
+    <id>by.bratukhin.uuidv7</id>
+
+    <category>Code Generation</category>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-name -->
+    <name>UUID v7 Generator</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor url="https://github.com/EgorBratuhin/idea-uuid-v7-generator">Egor Bratukhin</vendor>
+
+    <description><![CDATA[
+        <p>Generate a time-ordered <strong>UUID v7</strong> directly in your editor.</p>
+        <p>UUID v7 is a time-based unique identifier that is lexicographically sortable, making it ideal for database primary keys and distributed systems.</p>
+        <p>This plugin adds a single action to the <strong>Generate</strong> menu (<code>Alt+Insert</code> / <code>Cmd+N</code>) that inserts a freshly generated UUID v7 at the current caret position.</p>
+        <br/>
+        <p><strong>Features:</strong></p>
+        <ul>
+            <li>One-click insertion of UUID v7 via the Generate popup.</li>
+            <li>No external dependencies — uses Kotlin standard library's <code>Uuid.generateV7()</code>.</li>
+            <li>Supports all IntelliJ-based IDEs.</li>
+        </ul>
+        <p>Based on the official UUID v7 specification (RFC 9562).</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <actions>
+        <action id="UuidV7Plugin.GenerateUuidV7Action"
+                class="by.bratukhin.uuidv7.GenerateUuidV7Action"
+                text="UUID v7"
+                description="Generate a time-ordered UUID v7">
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
