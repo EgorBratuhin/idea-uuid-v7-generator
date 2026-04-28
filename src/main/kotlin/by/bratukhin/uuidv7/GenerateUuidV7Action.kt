@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.command.WriteCommandAction
+import com.intellij.openapi.editor.Caret
 import com.intellij.openapi.editor.Document
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -34,8 +35,16 @@ class GenerateUuidV7Action : AnAction() {
 
         WriteCommandAction.runWriteCommandAction(project) {
             for (caret in caretModel.allCarets) {
-                document.insertString(caret.offset, generateUuidV7())
+                insertUuidV7(document, caret)
             }
+        }
+    }
+
+    private fun insertUuidV7(document: Document, caret: Caret) {
+        if (caret.hasSelection()) {
+            document.replaceString(caret.selectionStart, caret.selectionEnd, generateUuidV7())
+        } else {
+            document.insertString(caret.offset, generateUuidV7())
         }
     }
 

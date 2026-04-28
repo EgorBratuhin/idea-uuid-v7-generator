@@ -1,6 +1,8 @@
 package by.bratukhin.uuidv7
 
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
+import org.apache.commons.lang3.StringUtils
+import org.assertj.core.api.Assertions.assertThat
 import java.util.UUID
 import kotlin.uuid.ExperimentalUuidApi
 
@@ -18,7 +20,9 @@ class GenerateUuidV7ActionTest : BasePlatformTestCase() {
 
         val text = myFixture.editor.document.text
 
-        assertEquals("Text should contain UUID", 7, UUID.fromString(text).version())
+        assertThat(UUID.fromString(text).version())
+            .describedAs { "Text should be UUID v7" }
+            .isEqualTo(7)
     }
 
     fun testInsertMultipleCarets() {
@@ -35,12 +39,42 @@ class GenerateUuidV7ActionTest : BasePlatformTestCase() {
 
         val lines = editor.document.text.split("\n")
 
-        lines.forEach { line ->
-            assertEquals(
-                "Line '${line}' should start with UUID v7",
-                7, UUID.fromString(line.substringBefore("line")).version()
-            )
+        assertThat(lines).allSatisfy {
+            assertThat(UUID.fromString(it.substringBefore("line")).version())
+                .describedAs { "Line '${it}' should start with UUID v7" }
+                .isEqualTo(7)
         }
+    }
+
+    fun testReplaceSelectedText() {
+        val placeholder = "placeholder"
+        val sourceText = """String id = "$placeholder";"""
+
+        myFixture.configureByText("Test.java", sourceText)
+
+        val editor = myFixture.editor
+
+        val startOffset = sourceText.indexOf(placeholder)
+        val endOffset = startOffset + placeholder.length
+        editor.selectionModel.setSelection(startOffset, endOffset)
+
+        myFixture.testAction(GenerateUuidV7Action())
+
+        val result = editor.document.text
+
+        val prefix = sourceText.substring(0, startOffset)
+        val suffix = sourceText.substring(endOffset)
+
+        assertThat(result)
+            .startsWith(prefix)
+            .endsWith(suffix)
+            .doesNotContain(placeholder)
+
+        val uuidPart = StringUtils.substringBetween(result, prefix, suffix)
+
+        assertThat(UUID.fromString(uuidPart).version())
+            .describedAs { "Replaced text should be UUID v7" }
+            .isEqualTo(7)
     }
 
 }
