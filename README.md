@@ -9,17 +9,18 @@ distributed systems, and event sourcing.
 
 ## ✨ Features
 
-- **One-click generation** — Insert UUID v7 via the Generate popup (`Alt+Insert` / `Cmd+N`)
-- **Multiple carets support** — Generate UUIDs at all caret positions simultaneously
-- **No external dependencies** — Uses Kotlin standard library's `Uuid.generateV7()`
-- **Undo/Redo support** — Fully integrated with IntelliJ's undo system
-- **RFC 9562 compliant** — Implements the official UUID v7 specification
+- **One-click generation** - Insert UUID v7 via the Generate popup (`Alt+Insert` / `Cmd+N`)
+- **Multiple carets support** - Generate UUIDs at all caret positions simultaneously
+- **Replace selection** - Select any text and trigger the action to replace it with a UUID v7
+- **No external dependencies** - Uses Kotlin standard library's `Uuid.generateV7()`
+- **Undo/Redo support** - Fully integrated with IntelliJ's undo system
+- **RFC 9562 compliant** - Implements the official UUID v7 specification
 
 ## 📦 Installation
 
 ### From JetBrains Marketplace
 
-1. Open **Settings** → **Plugins** → **Marketplace**
+1. Open **Settings** -> **Plugins** -> **Marketplace**
 2. Search for **"UUID v7 Generator"**
 3. Click **Install**
 4. Restart the IDE
@@ -27,7 +28,7 @@ distributed systems, and event sourcing.
 ### Manual Installation
 
 1. Download the latest release from [GitHub Releases](https://github.com/EgorBratuhin/idea-uuid-v7-generator/releases)
-2. Open **Settings** → **Plugins** → **⚙️** → **Install Plugin from Disk...**
+2. Open **Settings** -> **Plugins** -> **⚙️** -> **Install Plugin from Disk...**
 3. Select the downloaded `.zip` file
 4. Restart the IDE
 
@@ -45,7 +46,12 @@ distributed systems, and event sourcing.
 ### Multiple Carets
 
 The plugin supports IntelliJ's multiple carets feature. Simply place multiple carets using `Alt+Click` or `Ctrl+Alt+Shift+Click`,
-then trigger the action — UUIDs will be generated at all caret positions.
+then trigger the action - UUIDs will be generated at all caret positions.
+
+### Replace Selected Text
+
+Select any text in the editor, invoke the action, and the selection will be replaced with a UUID v7.
+This works with multiple carets too - each selection is replaced independently.
 
 ## 🔧 Requirements
 
