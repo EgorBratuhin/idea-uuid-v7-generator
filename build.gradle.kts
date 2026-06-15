@@ -3,12 +3,12 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "2.3.21"
-    id("org.jetbrains.intellij.platform") version "2.15.0"
+    id("org.jetbrains.kotlin.jvm") version "2.4.0"
+    id("org.jetbrains.intellij.platform") version "2.16.0"
 }
 
 group = "by.bratukhin"
-version = "1.0.2"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -35,6 +35,12 @@ intellijPlatform {
         }
 
         changeNotes = """
+            <h3>1.0.3</h3>
+            <ul>
+                <li>Updated Gradle 9.4.1 -> 9.5.1</li>
+                <li>Updated Kotlin 2.3.21 -> 2.4.0</li>
+                <li>Updated IntelliJ Platform Gradle Plugin 2.15.0 -> 2.16.0</li>
+            </ul>
             <h3>1.0.2</h3>
             <ul>
                 <li>Replace selected text with UUID v7 when a selection exists</li>
